@@ -1,2 +1,2 @@
-var blog = {}; //object
+var blog = {};
 blog.articles = [];
