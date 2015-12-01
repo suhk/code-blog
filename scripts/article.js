@@ -15,9 +15,10 @@ var Article = function(props) {
 Article.prototype.toHTML = function () {
     return '<article>' +
         '<h1>' + this.title + '</h1>' +
-        '<h3>Written by <em><a href=\"' + this.authorUrl + '\">' + this.author + '</a></em> ' +
+        '<h3 class=\"' + this.author.replace(/\s/g, '') + '\">Written by <em><a href=\"' + this.authorUrl + '\">' + 
+        this.author + '</a></em> ' +
         this.daysElapsed + ' days ago</h3>' +
-        '<h5>Category: ' + this.category + '</h5>' +
+        '<h5 class=\"' + this.category + '\">Category: ' + this.category + '</h5>' +
         '<div class="body">' + this.body + '</div>' +
         '<a href=# class="expand">Read More \></a></article>';
 }

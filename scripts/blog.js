@@ -202,6 +202,22 @@ Blog.prototype.init = function() {
     // Hide everything but the first paragraph
     $('article p:not(:first-child)').hide();
     $('#about').hide();
+
+    // Get the list of categories and authors for sorting
+    this.cat = null;
+    this.auth = null;
+    var cats = [];
+    var auths = [];
+    for(i = 0; i < this.articles.length; i++) {
+        if(cats.indexOf(this.articles[i].category) < 0) {
+            cats.push(this.articles[i].category);
+            $('#category').append("<option value=\"" + this.articles[i].category + "\">" + this.articles[i].category + "</option>");
+        }
+        if(auths.indexOf(this.articles[i].author) < 0) {
+            auths.push(this.articles[i].author);
+            $('#author').append("<option value=\"" + this.articles[i].author + "\">" + this.articles[i].author + "</option>");
+        }
+    }
 }
 
 Blog.prototype.addEvents = function() {
@@ -214,10 +230,39 @@ Blog.prototype.addEvents = function() {
     })
 
     // Add click events for nav bar
-    $('.tab').on('click', function() {
+    $('.tab').on('click', function(e) {
+        e.preventDefault();
         $('section').hide();
-        console.log($(this).data('content'));
         $('#' + $(this).data('content')).fadeIn(500);
     })
 
+    $('#category').on('click', function() {
+        if(this.cat != $("#category option:selected").text()) {
+            this.cat = $("#category option:selected").text();
+        } else {
+            return;
+        }
+
+        if(this.cat == "None") {
+            $("article").fadeIn();
+        } else {
+            $("article").hide();
+            $("." + $("#category option:selected").text()).parent().fadeIn();
+        }
+    })
+
+    $('#author').on('click', function() {
+        if(this.auth != $("#author option:selected").text()) {
+            this.auth = $("#author option:selected").text();
+        } else {
+            return;
+        }
+
+        if(this.auth == "None") {
+            $("article").fadeIn();
+        } else {
+            $("article").hide();
+            $("." + $("#author option:selected").text().replace(/\s/g, '')).parent().fadeIn();
+        }
+    })
 }
