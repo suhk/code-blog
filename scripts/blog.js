@@ -198,4 +198,17 @@ Blog.prototype.init = function() {
     // HTMLizes the articles
     for(i = 0; i < this.articles.length; i++)
         $('main').append(this.articles[i].toHTML());
+
+    // Hide everything but the first paragraph
+    $('article p:not(:first-child)').hide();
+}
+
+Blog.prototype.addEvents = function() {
+    // Add click event for 'read more'
+    $('main').on('click', '.expand', function(e) {
+        e.preventDefault();
+
+        $(this).parent().find('p').show(800);
+        $(this).fadeOut();
+    })
 }
