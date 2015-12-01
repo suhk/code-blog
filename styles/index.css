@@ -15,12 +15,11 @@ li {
     color: #FFF;
     border: 2px solid #044;
     font-size: 24px;
-    text-align: left;
     color: #10A2EE;
     list-style-type: none;
     margin: 10px;
     padding: 10px;
-    float:left;
+    float: right;
 }
 
 article {
