@@ -10,16 +10,40 @@ h1 {
     font-size: 36pt;
 }
 
-li {
+ul {
+    align-items: center;
+}
+
+ul li {
     background-color: #131322;
     color: #FFF;
     border: 2px solid #044;
     font-size: 24px;
     color: #10A2EE;
     list-style-type: none;
-    margin: 10px;
+    margin: 5px;
     padding: 10px;
-    float: left;
+    width: 100px;
+}
+
+ul li a {
+    color: #EEE;
+    text-decoration: none;
+}
+
+li a:hover {
+    color: #398561;
+    text-decoration: underline;
+}
+
+a {
+    color: #EEE;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #398561;
+    text-decoration: underline;
 }
 
 article {

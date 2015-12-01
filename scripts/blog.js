@@ -209,7 +209,7 @@ Blog.prototype.addEvents = function() {
     $('main').on('click', '.expand', function(e) {
         e.preventDefault();
 
-        $(this).parent().find('p').show(800);
+        $(this).parent().find('p').slideDown(800);
         $(this).fadeOut();
     })
 
