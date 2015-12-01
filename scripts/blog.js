@@ -201,6 +201,7 @@ Blog.prototype.init = function() {
 
     // Hide everything but the first paragraph
     $('article p:not(:first-child)').hide();
+    $('#about').hide();
 }
 
 Blog.prototype.addEvents = function() {
@@ -211,4 +212,12 @@ Blog.prototype.addEvents = function() {
         $(this).parent().find('p').show(800);
         $(this).fadeOut();
     })
+
+    // Add click events for nav bar
+    $('.tab').on('click', function() {
+        $('section').hide();
+        console.log($(this).data('content'));
+        $('#' + $(this).data('content')).fadeIn(500);
+    })
+
 }
