@@ -255,7 +255,7 @@ Blog.prototype.addEvents = function() {
         this.cat = $("#category option:selected").text();
 
         if(this.cat == "None") {
-            $("article").fadeIn();
+            $("article").fadeIn(500);
         } else {
             $("article").hide();
             $("." + $("#category option:selected").text()).parent().fadeIn(500);
@@ -268,7 +268,7 @@ Blog.prototype.addEvents = function() {
         this.auth = $("#author option:selected").text();
 
         if(this.auth == "None") {
-            $("article").fadeIn();
+            $("article").fadeIn(500);
         } else {
             $("article").hide();
             $("." + $("#author option:selected").text().replace(/\s/g, '')).parent().fadeIn(500);
