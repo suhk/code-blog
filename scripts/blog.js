@@ -251,9 +251,11 @@ Blog.prototype.addEvents = function() {
 
     // Add event handler for category search
     $('#category').on('change', function() {
-        $("#author").val("null");
-        this.cat = $("#category option:selected").text();
+        $("#author").val("null"); // Resets the author filter        
+        this.cat = $("#category option:selected").text(); // Set the category filter
 
+        // If you select 'None', show all articles
+        // Otherwise, show filtered articles
         if(this.cat == "None") {
             $("article").fadeIn(500);
         } else {
@@ -264,9 +266,11 @@ Blog.prototype.addEvents = function() {
 
     // Add event handler for author search
     $('#author').on('change', function() {
-        $("#category").val("null");
-        this.auth = $("#author option:selected").text();
+        $("#category").val("null"); // Resets the author filter
+        this.auth = $("#author option:selected").text(); // Set the author filter
 
+        // If you select 'None', show all articles
+        // Otherwise, show filtered articles
         if(this.auth == "None") {
             $("article").fadeIn(500);
         } else {
