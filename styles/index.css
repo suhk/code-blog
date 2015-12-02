@@ -1,17 +1,13 @@
 body {
     background-color: #123456;
     font-family: "Verdana", Geneva, sans-serif;
-    margin: 50px;
+    margin: 60px;
     padding: 0px;
 }
 
 h1 {
     color: #398561;
     font-size: 36pt;
-}
-
-nav ul {
-    align-items: center;
 }
 
 nav ul li {

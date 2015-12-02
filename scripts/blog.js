@@ -203,9 +203,9 @@ Blog.prototype.init = function() {
     $('article p:not(:first-child)').hide();
     $('#about').hide();
 
-    // Get the list of categories and authors for sorting
-    this.cat = null;
-    this.auth = null;
+    // Get the list of categories and authors for sorting and put them into dropdowns
+    this.cat = "None";
+    this.auth = "None";
     var cats = [];
     var auths = [];
     for(i = 0; i < this.articles.length; i++) {
@@ -236,12 +236,10 @@ Blog.prototype.addEvents = function() {
         $('#' + $(this).data('content')).fadeIn(500);
     })
 
-    $('#category').on('click', function() {
-        if(this.cat != $("#category option:selected").text()) {
-            this.cat = $("#category option:selected").text();
-        } else {
-            return;
-        }
+    // Add event handler for category search
+    $('#category').on('change', function() {
+        $("#author").val("null");
+        this.cat = $("#category option:selected").text();
 
         if(this.cat == "None") {
             $("article").fadeIn();
@@ -251,12 +249,10 @@ Blog.prototype.addEvents = function() {
         }
     })
 
-    $('#author').on('click', function() {
-        if(this.auth != $("#author option:selected").text()) {
-            this.auth = $("#author option:selected").text();
-        } else {
-            return;
-        }
+    // Add event handler for author search
+    $('#author').on('change', function() {
+        $("#category").val("null");
+        this.auth = $("#author option:selected").text();
 
         if(this.auth == "None") {
             $("article").fadeIn();
