@@ -1,12 +1,12 @@
 body {
-    background-color: #123456;
+    background-color: #456789;
     font-family: "Verdana", Geneva, sans-serif;
     margin: 60px;
     padding: 0px;
 }
 
 h1 {
-    color: #398561;
+    color: #5AB390;
     font-size: 36pt;
 }
 
@@ -28,7 +28,7 @@ nav ul li a {
 }
 
 li a:hover {
-    color: #398561;
+    color: #5AB390;
     text-decoration: underline;
 }
 

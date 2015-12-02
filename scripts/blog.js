@@ -1,5 +1,7 @@
 var Blog = function() {
     this.articles = []; // Instantiate an array of articles
+    this.cat = "None"; // The current selected category
+    this.auth = "None"; // The current selected author
     this.rawData = [
       {
         title:       'Bacon Ipsum',
@@ -171,6 +173,7 @@ var Blog = function() {
 
       },
     ];
+
 };
 
 // CompareByDate function for sorting the articles
@@ -197,25 +200,35 @@ Blog.prototype.init = function() {
 
     // HTMLizes the articles
     for(i = 0; i < this.articles.length; i++)
-        $('main').append(this.articles[i].toHTML());
+        this.articles[i].toHTML();
+
+    // Hides the template
+    $('article:first').hide();
 
     // Hide everything but the first paragraph
     $('article p:not(:first-child)').hide();
     $('#about').hide();
 
     // Get the list of categories and authors for sorting and put them into dropdowns
-    this.cat = "None";
-    this.auth = "None";
     var cats = [];
     var auths = [];
     for(i = 0; i < this.articles.length; i++) {
+        // If it is a new category, add it to the list
         if(cats.indexOf(this.articles[i].category) < 0) {
             cats.push(this.articles[i].category);
-            $('#category').append("<option value=\"" + this.articles[i].category + "\">" + this.articles[i].category + "</option>");
+
+            var $op = $('option:first').clone();
+            $op.text(this.articles[i].category);
+            $('#category').append($op);
         }
+
+        // If it is a new author, add it to the list
         if(auths.indexOf(this.articles[i].author) < 0) {
             auths.push(this.articles[i].author);
-            $('#author').append("<option value=\"" + this.articles[i].author + "\">" + this.articles[i].author + "</option>");
+
+            var $op = $('option:first').clone();
+            $op.text(this.articles[i].author);
+            $('#author').append($op);
         }
     }
 }
@@ -245,7 +258,7 @@ Blog.prototype.addEvents = function() {
             $("article").fadeIn();
         } else {
             $("article").hide();
-            $("." + $("#category option:selected").text()).parent().fadeIn();
+            $("." + $("#category option:selected").text()).parent().fadeIn(500);
         }
     })
 
@@ -258,7 +271,7 @@ Blog.prototype.addEvents = function() {
             $("article").fadeIn();
         } else {
             $("article").hide();
-            $("." + $("#author option:selected").text().replace(/\s/g, '')).parent().fadeIn();
+            $("." + $("#author option:selected").text().replace(/\s/g, '')).parent().fadeIn(500);
         }
     })
 }
