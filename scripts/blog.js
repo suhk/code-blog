@@ -238,7 +238,7 @@ Blog.prototype.addEvents = function() {
     $('main').on('click', '.expand', function(e) {
         e.preventDefault();
 
-        $(this).parent().find('p').slideDown(800);
+        $(this).parent().find('p').fadeIn(500);
         $(this).fadeOut();
     })
 
@@ -251,7 +251,7 @@ Blog.prototype.addEvents = function() {
 
     // Add event handler for category search
     $('#category').on('change', function() {
-        $("#author").val("null"); // Resets the author filter        
+        $("#author").val("null"); // Resets the author filter
         this.cat = $("#category option:selected").text(); // Set the category filter
 
         // If you select 'None', show all articles
