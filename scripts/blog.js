@@ -30,7 +30,7 @@ Blog.prototype.init = function() {
 
     // HTMLizes the articles
     for(i = 0; i < this.articles.length; i++)
-        this.articles[i].toHTML();
+        this.articles[i].toHTML('main');
 
     // Hides the template
     $('article:first').hide();

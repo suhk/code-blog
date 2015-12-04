@@ -36,7 +36,7 @@ Article.prototype.toHTML2 = function () {
 }
 
 // Takes the handlebars template, fill it, and add it to the web page
-Article.prototype.toHTML = function () {
+Article.prototype.toHTML = function (selector) {
     var data = {
         title: this.title,
         author: this.author,
@@ -49,5 +49,5 @@ Article.prototype.toHTML = function () {
     var appTemplate = $('#template').html()
     var compiledTemplate = Handlebars.compile(appTemplate);
     var html = compiledTemplate(data);
-    $('main').append(html);
+    $(selector).append(html);
 }
