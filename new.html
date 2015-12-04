@@ -14,7 +14,6 @@
             <h3 class={{authorSpace}}>Written by <em><a class="auth" href="{{authorUrl}}">{{author}}</a></em> {{daysElapsed}} days ago</h3>
             <h5 class={{category}}>Category: {{category}}</h5>
             <div class="body">{{{body}}}</div>
-            <a href=# class="expand">Read More ></a>
             <hr size="2" color="black">
         </article>
     </script>
@@ -40,6 +39,7 @@
                 <input type="text" id="article-author" placeholder="Author Name" required>
                 <input type="text" id="article-author-url" placeholder="Article URL" required>
                 <input type="text" id="article-category" placeholder="Category" required>
+                <button id="article-preview">Preview</button>
             </form>
 
         </section>
@@ -52,9 +52,9 @@
         </section>
 
     </main>
-
     <script src="scripts/article.js"></script>
     <script src="scripts/blog.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
     <script src="scripts/new.js"></script>
 </body>
 

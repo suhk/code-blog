@@ -38,6 +38,7 @@ Article.prototype.toHTML2 = function () {
 // Takes the handlebars template, fill it, and add it to the web page
 Article.prototype.toHTML = function () {
     var data = {
+        title: this.title,
         author: this.author,
         authorUrl: this.authorUrl,
         category: this.category,
