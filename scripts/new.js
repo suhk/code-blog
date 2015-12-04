@@ -20,5 +20,8 @@ $('#article-preview').on('click', function(event) {
   // write JSON string
   $('#article-json').val(JSON.stringify(prop));
   
+  $('pre code').each(function(i, block) {
+    hljs.highlightBlock(block);
+  });
 });
 
