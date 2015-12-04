@@ -12,7 +12,7 @@ var Article = function(props) {
 }
 
 // Turns an article object into HTML code
-Article.prototype.toHTML = function () {
+Article.prototype.toHTML2 = function () {
     var $art = $('article:first').clone();
 
     $art.find('h1').append(this.title);
@@ -33,4 +33,20 @@ Article.prototype.toHTML = function () {
     $art.find('.expand').append("Read More >");
 
     $('main').append($art);
+}
+
+// Takes the handlebars template, fill it, and add it to the web page
+Article.prototype.toHTML = function () {
+    var data = {
+        author: this.author,
+        authorUrl: this.authorUrl,
+        category: this.category,
+        daysElapsed: this.daysElapsed,
+        body: this.body,
+        authorSpace: this.author.replace(/\s/g, '')
+    };
+    var appTemplate = $('#template').html()
+    var compiledTemplate = Handlebars.compile(appTemplate);
+    var html = compiledTemplate(data);
+    $('main').append(html);
 }

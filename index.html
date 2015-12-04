@@ -1,5 +1,5 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>
         Kenny Suh's Blog
@@ -8,7 +8,16 @@
     <link rel='stylesheet' href='styles/index.css'>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.min.js" charset="utf-8"></script>
-    <script id="template"></script>
+    <script id="template" type="text/x-handlebars-template">
+        <article>
+            <h1>{{title}}</h1>
+            <h3 class={{authorSpace}}>Written by <em><a class="auth" href="{{authorUrl}}">{{author}}</a></em> {{daysElapsed}} days ago</h3>
+            <h5 class={{category}}>Category: {{category}}</h5>
+            <div class="body">{{{body}}}</div>
+            <a href=# class="expand">Read More ></a>
+            <hr size="2" color="black">
+        </article>
+    </script>
 </head>
 
 <body>
@@ -46,6 +55,7 @@
     <div class="all">
         <section id="home">
             <main>
+                <!-->
                 <article>
                     <h1></h1>
                     <h3><em><a class="auth"> </a></em></h3>
@@ -54,6 +64,7 @@
                     <a href=# class="expand"></a>
                     <hr size="2" color="black">
                 </article>
+                <!-->
             </main>
         </section>
         <section id="about">

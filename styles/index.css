@@ -82,6 +82,7 @@ hr {
 
 .content {
     float: left;
+    min-width: 90%;
 }
 
 @media screen and (min-width: 400px) {
