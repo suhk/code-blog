@@ -1,4 +1,5 @@
 blogArticles = [
+{"title":"asdhaksdk","author":"dkfhj","authorUrl":"shdgfsg","category":"fgjsd","publishedOn":"2015-12-04T21:54:46.805Z","body":"<p>akhfdkjsdfhkj</p>\n<p>ksjdhfjksdhfkjsdf</p>\n<pre><code>    &lt;script src=&quot;scripts/article.js&quot;&gt;&lt;/script&gt;\n    &lt;script src=&quot;scripts/blog.js&quot;&gt;&lt;/script&gt;\n    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js&quot;&gt;&lt;/script&gt;\n    &lt;script src=&quot;http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js&quot;&gt;&lt;/script&gt;\n    &lt;script src=&quot;scripts/new.js&quot;&gt;&lt;/script&gt;\n</code></pre>"},
   {
     title:       'Bacon Ipsum',
     category:    'food',
