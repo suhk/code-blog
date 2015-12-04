@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        Kenny Suh's Blog
+    </title>
+    <meta name=”viewport” content=”width=device-width, initial-scale=1”>
+    <link rel='stylesheet' href='styles/index.css'>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.min.js" charset="utf-8"></script>
+    <script id="template" type="text/x-handlebars-template">
+        <article>
+            <h1>{{title}}</h1>
+            <h3 class={{authorSpace}}>Written by <em><a class="auth" href="{{authorUrl}}">{{author}}</a></em> {{daysElapsed}} days ago</h3>
+            <h5 class={{category}}>Category: {{category}}</h5>
+            <div class="body">{{{body}}}</div>
+            <a href=# class="expand">Read More ></a>
+            <hr size="2" color="black">
+        </article>
+    </script>
+</head>
+
+<body>
+    <header>
+        <center>
+            <h1>
+                The Blog Of A Budding Web Developer
+            </h1>
+            <h2>
+                Static pages are the best
+            </h2>
+        </center>
+    </header>
+
+    <main>
+        <section>
+            <form>
+                <input type="text" id="article-title" placeholder="Article Title" required>
+                <textarea id="article-body"></textarea>
+                <input type="text" id="article-author" placeholder="Author Name" required>
+                <input type="text" id="article-author-url" placeholder="Article URL" required>
+                <input type="text" id="article-category" placeholder="Category" required>
+            </form>
+
+        </section>
+
+        <section id="preview">
+        </section>
+
+        <section id="export">
+            <input type="text" readonly id="article-json">
+        </section>
+
+    </main>
+
+    <script src="scripts/article.js"></script>
+    <script src="scripts/blog.js"></script>
+    <script src="scripts/new.js"></script>
+</body>
+
+</html>
