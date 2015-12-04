@@ -89,4 +89,9 @@ hr {
         display: block;
         float: left;
     }
+
+    article {
+        min-width: 90%;
+        float:left;
+    }
 }
