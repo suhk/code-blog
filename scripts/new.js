@@ -1,4 +1,4 @@
-$('#article-preview').on('click', function(event) {
+$('#write').on('mouseup keyup', function(event) {
   event.preventDefault();
 
   var prop = {};
@@ -15,13 +15,13 @@ $('#article-preview').on('click', function(event) {
 
   // display preview on page
   var newArticle = new Article(prop);
-  $('#preview').children().remove();
+  $('#preview article').children().remove();
   newArticle.toHTML('#preview');
 
   // write JSON string
   $('#article-json').val(JSON.stringify(prop));
 
   $('pre code').each(function(i, block) {
-    hljs.highlightBlock(block);
+      hljs.highlightBlock(block);
   });
 });

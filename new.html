@@ -27,30 +27,57 @@
                 The Blog Of A Budding Web Developer
             </h1>
             <h2>
-                Static pages are the best
+                The secret spot for writing new articles.
             </h2>
         </center>
     </header>
 
     <main>
-        <section>
-            <form>
-                <input type="text" id="article-title" placeholder="Article Title" required>
-                <textarea id="article-body"></textarea>
-                <input type="text" id="article-author" placeholder="Author Name" required>
-                <input type="text" id="article-author-url" placeholder="Article URL" required>
-                <input type="text" id="article-category" placeholder="Category" required>
-                <button id="article-preview">Preview</button>
-            </form>
+        <h2 class="custHeader">
+            New Article
+        </h2>
+        <div id="make">
+            <section>
+                <form id="write">
+                    <label>
+                        Title
+                        <br>
+                        <input type="text" id="article-title" placeholder="Article Title" required>
+                    </label>
+                    <label>
+                        Author
+                        <br>
+                        <input type="text" id="article-author" placeholder="Author Name" required>
+                    </label>
+                    <label>
+                        Author URL
+                        <br>
+                        <input type="text" id="article-author-url" placeholder="Author URL" required>
+                    </label>
+                    <label>
+                        Category
+                        <br>
+                        <input type="text" id="article-category" placeholder="Category" required>
+                    </label>
+                    <label>
+                        Article
+                        <br>
+                        <textarea id="article-body" rows="8" cols="40"></textarea>
+                    </label>
+                </form>
+                <label>
+                    Paste this code into blogArticles.js
+                    <br>
+                    <input type="text" readonly id="article-json">
+                </label>
+            </section>
+        </div>
 
-        </section>
-
-        <section id="preview">
-        </section>
-
-        <section id="export">
-            <input type="text" readonly id="article-json">
-        </section>
+        <div id="prev">
+            <section id="preview">
+                <h2><u>Preview</u></h2>
+            </section>
+        </div>
 
     </main>
     <script src="scripts/article.js"></script>
