@@ -31,19 +31,9 @@ nav ul li a {
     text-decoration: none;
 }
 
-li a:hover {
-    color: #5AB390;
-    text-decoration: underline;
-}
-
 a {
     color: #EEE;
     text-decoration: none;
-}
-
-a:hover {
-    color: #398561;
-    text-decoration: underline;
 }
 
 article {
@@ -71,28 +61,4 @@ p {
 
 hr {
     margin: 25px;
-}
-
-.filter {
-    display: inline-block;
-    padding: 10px;
-    width: auto;
-    font-size: 24px;
-}
-
-.content {
-    float: left;
-    min-width: 90%;
-}
-
-@media screen and (min-width: 400px) {
-    .filter {
-        display: block;
-        float: left;
-    }
-
-    article {
-        min-width: 90%;
-        float:left;
-    }
 }
