@@ -1,5 +1,7 @@
 var Blog = function() {
     this.articles = []; // Instantiate an array of articles
+    this.cat = "None"; // The current selected category
+    this.auth = "None"; // The current selected author
     this.rawData = [
       {
         title:       'Bacon Ipsum',
@@ -63,7 +65,7 @@ var Blog = function() {
         author:      'Betty Crocker',
         authorUrl:   'http://www.bettycrocker.com/',
         publishedOn: '2015-10-29',
-        body:        '<p>I love danish sweet. Bonbon marshmallow marshmallow cotton candy jelly beans. <img src="http://lorempixel.com/400/200/food/" class="pull-left">I love apple pie I love tootsie roll powder brownie.</p><p>Croissant I love wafer. Biscuit ice cream marshmallow cake brownie topping I love. I love oat cake biscuit lemon drops I love tiramisu icing.</p><p>Croissant biscuit caramels chupa chups. Cookie fruitcake brownie I love. Sweet roll sesame snaps apple pie.<img src="http://placekitten.com/1250/1310" class="pull-right"></p><p>Lemon drops cupcake danish pudding chocolate cake sugar plum sugar plum ice cream. Cupcake carrot cake muffin. Topping gingerbread I love.</p><p>Jelly-o muffin oat cake apple pie icing cookie. Soufflé tart pie chupa chups cake. Candy sugar plum I love fruitcake tart halvah. Jelly oat cake pastry.</p>'
+        body:        '<p>I love danish sweets. Bonbon marshmallow marshmallow cotton candy jelly beans. <img src="http://lorempixel.com/400/200/food/" class="pull-left">I love apple pie I love tootsie roll powder brownie.</p><p>Croissant I love wafer. Biscuit ice cream marshmallow cake brownie topping I love. I love oat cake biscuit lemon drops I love tiramisu icing.</p><p>Croissant biscuit caramels chupa chups. Cookie fruitcake brownie I love. Sweet roll sesame snaps apple pie.<img src="http://placekitten.com/1250/1310" class="pull-right"></p><p>Lemon drops cupcake danish pudding chocolate cake sugar plum sugar plum ice cream. Cupcake carrot cake muffin. Topping gingerbread I love.</p><p>Jelly-o muffin oat cake apple pie icing cookie. Soufflé tart pie chupa chups cake. Candy sugar plum I love fruitcake tart halvah. Jelly oat cake pastry.</p>'
       },
       {
         title:       'Hipsters Ipsum',
@@ -171,6 +173,7 @@ var Blog = function() {
 
       },
     ];
+
 };
 
 // CompareByDate function for sorting the articles
@@ -197,5 +200,78 @@ Blog.prototype.init = function() {
 
     // HTMLizes the articles
     for(i = 0; i < this.articles.length; i++)
-        $('main').append(this.articles[i].toHTML());
+        this.articles[i].toHTML();
+
+    // Hides the template
+    $('article:first').hide();
+
+    // Hide everything but the first paragraph
+    $('article p:not(:first-child)').hide();
+    $('#about').hide();
+
+    // Get the list of categories and authors for sorting and put them into dropdowns
+    var cats = [];
+    var auths = [];
+    for(i = 0; i < this.articles.length; i++) {
+        // If it is a new category, add it to the list
+        if(cats.indexOf(this.articles[i].category) < 0) {
+            cats.push(this.articles[i].category);
+
+            var $op = $('option:first').clone();
+            $op.text(this.articles[i].category);
+            $('#category').append($op);
+        }
+
+        // If it is a new author, add it to the list
+        if(auths.indexOf(this.articles[i].author) < 0) {
+            auths.push(this.articles[i].author);
+
+            var $op = $('option:first').clone();
+            $op.text(this.articles[i].author);
+            $('#author').append($op);
+        }
+    }
+}
+
+Blog.prototype.addEvents = function() {
+    // Add click event for 'read more'
+    $('main').on('click', '.expand', function(e) {
+        e.preventDefault();
+
+        $(this).parent().find('p').slideDown(800);
+        $(this).fadeOut();
+    })
+
+    // Add click events for nav bar
+    $('.tab').on('click', function(e) {
+        e.preventDefault();
+        $('section').hide();
+        $('#' + $(this).data('content')).fadeIn(500);
+    })
+
+    // Add event handler for category search
+    $('#category').on('change', function() {
+        $("#author").val("null");
+        this.cat = $("#category option:selected").text();
+
+        if(this.cat == "None") {
+            $("article").fadeIn(500);
+        } else {
+            $("article").hide();
+            $("." + $("#category option:selected").text()).parent().fadeIn(500);
+        }
+    })
+
+    // Add event handler for author search
+    $('#author').on('change', function() {
+        $("#category").val("null");
+        this.auth = $("#author option:selected").text();
+
+        if(this.auth == "None") {
+            $("article").fadeIn(500);
+        } else {
+            $("article").hide();
+            $("." + $("#author option:selected").text().replace(/\s/g, '')).parent().fadeIn(500);
+        }
+    })
 }

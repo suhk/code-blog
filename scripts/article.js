@@ -5,19 +5,32 @@ var Article = function(props) {
     this.title = props.title;
     this.body = props.body;
     this.publishedOn = props.publishedOn;
+
     var date = new Date(this.publishedOn);
     var today = new Date();
     this.daysElapsed = Math.round((today - date) / 1000 / 60 / 60 / 24);
-
 }
 
 // Turns an article object into HTML code
 Article.prototype.toHTML = function () {
-    return '<article>' +
-        '<h1>' + this.title + '</h1>' +
-        '<h3>Written by <em><a href=' + this.authorUrl + '>' + this.author + '</a></em> ' +
-        this.daysElapsed + ' days ago</h3>' +
-        '<h5>Category: ' + this.category + '</h5>' +
-        '<p>' + this.body + '</p>' +
-        '</article>';
+    var $art = $('article:first').clone();
+
+    $art.find('h1').append(this.title);
+
+    $art.find('h3').attr('class', this.author.replace(/\s/g, ''));
+    $art.find('h3').prepend("Written by");
+
+    $art.find('.auth').append(this.author);
+    $art.find('.auth').attr('href', this.authorUrl)
+
+    $art.find('h3').append(" about " + this.daysElapsed + " days ago");
+
+    $art.find('h5').append("Category: " + this.category);
+    $art.find('h5').attr('class', this.category);
+
+    $art.find('.body').append(this.body);
+
+    $art.find('.expand').append("Read More >");
+
+    $('main').append($art);
 }
