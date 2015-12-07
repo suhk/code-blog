@@ -56,9 +56,9 @@ Blog.prototype.init = function() {
         if(auths.indexOf(this.articles[i].author) < 0) {
             auths.push(this.articles[i].author);
 
-            var $op = $('option:first').clone();
-            $op.text(this.articles[i].author);
-            $('#author').append($op);
+            var $op2 = $('option:first').clone();
+            $op2.text(this.articles[i].author);
+            $('#author').append($op2);
         }
     }
 }
