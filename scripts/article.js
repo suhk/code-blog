@@ -9,7 +9,7 @@ var Article = function(props) {
     var date = new Date(this.publishedOn);
     var today = new Date();
     this.daysElapsed = Math.round((today - date) / 1000 / 60 / 60 / 24);
-}
+};
 
 // Takes the handlebars template, fill it, and add it to the web page
 Article.prototype.toHTML = function (selector) {
@@ -26,4 +26,4 @@ Article.prototype.toHTML = function (selector) {
 
     var html = this.compiledTemplate(data);
     $(selector).append(html);
-}
+};
