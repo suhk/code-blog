@@ -61,7 +61,11 @@ stats.wlCounter = function(art) {
 // Map function to count number of characters and tag the author and word count with it
 stats.wlCounterWithAuthor = function(art) {
     var body = stats.removeMd(art.markdown);
-    return {wl: body.split(new RegExp(' ', 'g')).map(stats.strLength).reduce(stats.summer, 0), author: art.author, words: body.split(new RegExp(' ', 'g')).length};
+    return {
+        wl: body.split(new RegExp(' ', 'g')).map(stats.strLength).reduce(stats.summer, 0),
+        author: art.author,
+        words: body.split(new RegExp(' ', 'g')).length
+    };
 };
 
 // Map function to count number of articles
@@ -125,6 +129,8 @@ $(function() {
         $('#avgWL').append('Average Word Length: ' + stats.avgWL(data));
         $('#avgWLAuthor').prepend('Average Word Length Per Author:');
         var wlAuthorStats = stats.avgWLAuthor(data);
+
+        // This 'for' loop is only for putting the HTML lists!!
         for(var i = 0; i < wlAuthorStats[0].length; i++) {
             $('#authList').append('<li>' + wlAuthorStats[0][i] + ': ' + wlAuthorStats[1][i] + '</li>');
         }
