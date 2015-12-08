@@ -18,12 +18,12 @@ Blog.prototype.sortData = function() {
     )
 }
 
-Blog.prototype.init = function(data) {
-    this.rawData = data;
+Blog.prototype.init = function(rawData) {
 
     // Pull article data from rawData and create Article objs
-    for(i = 0; i < this.rawData.length; i++)
-        this.articles.push(new Article(this.rawData[i]));
+    for(i = 0; i < rawData.length; i++) {
+        this.articles.push(new Article(rawData[i]));
+    }
 
     // Sort the articles by date (recent first)
     this.sortData();
