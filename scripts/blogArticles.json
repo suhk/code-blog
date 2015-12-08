@@ -1,5 +1,13 @@
 [
   {
+      "title": "Transmitting Closed-source Arrays",
+      "category": "noman",
+      "author": "Kenneth Suh",
+      "authorUrl": "http://www.something.com",
+      "publishedOn": "2014-05-24",
+      "markdown": "The other day I saw a bear a great big bear a way up there"
+  },
+  {
     "title": "Transmitting Open-source Arrays",
     "category": "firewall",
     "author": "Dr. Tressie Kuphal",
