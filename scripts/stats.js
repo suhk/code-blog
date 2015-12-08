@@ -11,6 +11,7 @@ stats.uniqueAuthor = function(counter, a) {
 };
 
 // Remove markdown text from parameter
+// Code taken from: https://github.com/stiang/remove-markdown/blob/master/index.js
 stats.removeMd = function(text) {
     return text
       // Remove HTML tags
