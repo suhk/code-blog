@@ -1,5 +1,6 @@
 stats = {};
 
+// Reduce function to count unique authors
 stats.uniqueAuthor = function(counter, a) {
     if(stats.auths.indexOf(a.author) < 0) {
         stats.auths.push(a.author);
@@ -9,6 +10,7 @@ stats.uniqueAuthor = function(counter, a) {
     }
 };
 
+// Remove markdown text from parameter
 stats.removeMd = function(text) {
     return text
       // Remove HTML tags
@@ -33,51 +35,62 @@ stats.removeMd = function(text) {
       .replace(/\n{2,}/g, '\n\n');
 };
 
+// Map function to count number of words in an article
 stats.wordCounter = function(art) {
     var body = stats.removeMd(art.markdown);
     return body.split(new RegExp(' ', 'g')).length;
 };
 
+// Reduce function to sum up a list of numbers
 stats.summer = function(counter, a) {
     return counter + a;
 };
 
+// Map function to return the length of strings
 stats.strLength = function(str) {
     return str.length;
 };
 
+// Map function to count the number of characters per article
 stats.wlCounter = function(art) {
     var body = stats.removeMd(art.markdown);
     return body.split(new RegExp(' ', 'g')).map(stats.strLength).reduce(stats.summer, 0);
 };
 
+// Map function to count number of characters and tag the author and word count with it
 stats.wlCounterWithAuthor = function(art) {
     var body = stats.removeMd(art.markdown);
     return {wl: body.split(new RegExp(' ', 'g')).map(stats.strLength).reduce(stats.summer, 0), author: art.author, words: body.split(new RegExp(' ', 'g')).length};
 };
 
+// Map function to count number of articles
 stats.countArticles = function(articles) {
     return articles.length;
 };
 
+// Map function to count number of authors
 stats.countAuthors = function(articles) {
     stats.auths = [];
     return articles.reduce(stats.uniqueAuthor , 0);
 };
 
+// Map function to count number of words in each article
 stats.countWords = function(articles) {
     return articles.map(stats.wordCounter).reduce(stats.summer, 0);
 };
 
+// Map function to return average word length per article
 stats.avgWL = function(articles) {
     return articles.map(stats.wlCounter).reduce(stats.summer, 0) / stats.wordCount;
 };
 
+// Map function to return the author of the article
 stats.getAuthors = function(art) {
     return art.author;
 };
 
-stats.someFunction = function(counter, a) {
+// Sums the word lengths by author, tagging along the word count
+stats.authorCount = function(counter, a) {
     if(counter[0].indexOf(a.author) < 0) {
         counter[0].push(a.author);
         counter[1].push([a.wl, a.words]);
@@ -88,17 +101,20 @@ stats.someFunction = function(counter, a) {
     return counter;
 };
 
-stats.someOtherFunction = function(counter, a) {
+// Averages the word length by author
+stats.wlAverager = function(counter, a) {
     counter.push(a[0] / a[1]);
     return counter;
 };
 
+// Returns the average word lengths sorted by author
 stats.avgWLAuthor = function(articles) {
     var wls = articles.map(stats.wlCounterWithAuthor);
-    var arr = wls.reduce(stats.someFunction, [[], []]);
-    return [arr[0], arr[1].reduce(stats.someOtherFunction, [])];
+    var arr = wls.reduce(stats.authorCount, [[], []]);
+    return [arr[0], arr[1].reduce(stats.wlAverager, [])];
 };
 
+// Main function
 $(function() {
     $.getJSON('scripts/blogArticles.json', function(data) {
         stats.wordCount = stats.countWords(data);
