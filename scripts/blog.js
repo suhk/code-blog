@@ -2,14 +2,12 @@ var Blog = function() {
     this.articles = []; // Instantiate an array of articles
     this.cat = "None"; // The current selected category
     this.auth = "None"; // The current selected author
-    this.rawData = blogArticles; // Import the articles
-
 };
 
 // CompareByDate function for sorting the articles
 // Taken from Microsoft website
 Blog.prototype.sortData = function() {
-    blog.articles.sort(
+    this.articles.sort(
         function compareByDate(a, b) {
             if (a.daysElapsed < b.daysElapsed)
                 return -1;
@@ -20,7 +18,9 @@ Blog.prototype.sortData = function() {
     )
 }
 
-Blog.prototype.init = function() {
+Blog.prototype.init = function(data) {
+    this.rawData = data;
+
     // Pull article data from rawData and create Article objs
     for(i = 0; i < this.rawData.length; i++)
         this.articles.push(new Article(this.rawData[i]));
@@ -32,12 +32,10 @@ Blog.prototype.init = function() {
     for(i = 0; i < this.articles.length; i++)
         this.articles[i].toHTML('main');
 
-    // Hides the template
-    $('article:first').hide();
+    $('#about').hide();
 
     // Hide everything but the first paragraph
     $('article p:not(:first-child)').hide();
-    $('#about').hide();
 
     // Get the list of categories and authors for sorting and put them into dropdowns
     var cats = [];
@@ -90,7 +88,7 @@ Blog.prototype.addEvents = function() {
             $("article").fadeIn(500);
         } else {
             $("article").hide();
-            $("." + $("#category option:selected").text()).parent().fadeIn(500);
+            $("." + $("#category option:selected").text().replace(/\s/g, '')).parent().fadeIn(500);
         }
     })
 

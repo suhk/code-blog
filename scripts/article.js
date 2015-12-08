@@ -3,7 +3,7 @@ var Article = function(props) {
     this.authorUrl = props.authorUrl;
     this.category = props.category;
     this.title = props.title;
-    this.body = props.body;
+    this.body = marked(props.markdown);
     this.publishedOn = props.publishedOn;
 
     var date = new Date(this.publishedOn);
@@ -20,10 +20,10 @@ Article.prototype.toHTML = function (selector) {
         category: this.category,
         daysElapsed: this.daysElapsed,
         body: this.body,
-        authorSpace: this.author.replace(/\s/g, '')
+        authorSpace: this.author.replace(/\s/g, ''),
+        categorySpace: this.category.replace(/\s/g, '')
     };
-    var appTemplate = $('#template').html()
-    var compiledTemplate = Handlebars.compile(appTemplate);
-    var html = compiledTemplate(data);
+
+    var html = this.compiledTemplate(data);
     $(selector).append(html);
 }
