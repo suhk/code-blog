@@ -1,4 +1,5 @@
 stats = {};
+stats.auths = [];
 
 // Reduce function to count unique authors
 stats.uniqueAuthor = function(counter, a) {
@@ -75,7 +76,6 @@ stats.countArticles = function(articles) {
 
 // Map function to count number of authors
 stats.countAuthors = function(articles) {
-    stats.auths = [];
     return articles.reduce(stats.uniqueAuthor , 0);
 };
 
