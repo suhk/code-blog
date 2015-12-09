@@ -119,6 +119,17 @@ stats.avgWLAuthor = function(articles) {
     return [arr[0], arr[1].reduce(stats.wlAverager, [])];
 };
 
+stats.wordAuthorTotaler = function(counter, a) {
+    counter.push(a[1]);
+    return counter;
+}
+
+stats.countWordsAuthor = function(articles) {
+    var wls = articles.map(stats.wlCounterWithAuthor);
+    var arr = wls.reduce(stats.authorCount, [[], []]);
+    return [arr[0], arr[1].reduce(stats.wordAuthorTotaler, [])];
+};
+
 // Main function
 $(function() {
     $.getJSON('scripts/blogArticles.json', function(data) {
@@ -128,11 +139,17 @@ $(function() {
         $('#numWords').append('Number of Words: ' + stats.wordCount);
         $('#avgWL').append('Average Word Length: ' + stats.avgWL(data));
         $('#avgWLAuthor').prepend('Average Word Length Per Author:');
+        $('#numWordsAuthor').prepend('Number of Words Per Author:')
         var wlAuthorStats = stats.avgWLAuthor(data);
+        var wordAuthorStats = stats.countWordsAuthor(data);
 
-        // This 'for' loop is only for putting the HTML lists!!
+        // These 'for' loop is only for putting the HTML lists!!
         for(var i = 0; i < wlAuthorStats[0].length; i++) {
             $('#authList').append('<li>' + wlAuthorStats[0][i] + ': ' + wlAuthorStats[1][i] + '</li>');
+        }
+
+        for(i = 0; i < wordAuthorStats[0].length; i++) {
+            $('#authList2').append('<li>' + wordAuthorStats[0][i] + ': ' + wordAuthorStats[1][i] + '</li>');
         }
     });
 });
