@@ -119,11 +119,13 @@ stats.avgWLAuthor = function(articles) {
     return [arr[0], arr[1].reduce(stats.wlAverager, [])];
 };
 
+// Totals the words per author
 stats.wordAuthorTotaler = function(counter, a) {
     counter.push(a[1]);
     return counter;
 };
 
+// Counts the number of words per author
 stats.countWordsAuthor = function(articles) {
     var wls = articles.map(stats.wlCounterWithAuthor);
     var arr = wls.reduce(stats.authorCount, [[], []]);
