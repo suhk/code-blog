@@ -4,33 +4,19 @@ var Blog = function() {
     this.auth = 'None'; // The current selected author
 };
 
-// CompareByDate function for sorting the articles
-// Taken from Microsoft website
-Blog.prototype.sortData = function() {
-    this.articles.sort(
-        function compareByDate(a, b) {
-            if (a.daysElapsed < b.daysElapsed)
-                return -1;
-            if (a.daysElapsed > b.daysElapsed)
-                return 1;
-            return 0;
-        }
-    );
+// Grab the article template and make a handlebars function
+Blog.prototype.compileTemplate = function(data) {
+    Article.prototype.compiledTemplate = Handlebars.compile(data);
 };
 
-Blog.prototype.init = function(rawData) {
-
-    // Pull article data from rawData and create Article objs
-    for(i = 0; i < rawData.length; i++) {
-        this.articles.push(new Article(rawData[i]));
-    }
-
+Blog.prototype.init = function() {
     // Sort the articles by date (recent first)
     this.sortData();
-
     // HTMLizes the articles
-    for(i = 0; i < this.articles.length; i++)
+    for(i = 0; i < this.articles.length; i++) {
+
         this.articles[i].toHTML('main');
+    }
 
     $('#about').hide();
 
@@ -106,4 +92,18 @@ Blog.prototype.addEvents = function() {
             $('.' + $('#author option:selected').text().replace(/\s/g, '')).parent().fadeIn(500);
         }
     });
+};
+
+// CompareByDate function for sorting the articles
+// Taken from Microsoft website
+Blog.prototype.sortData = function() {
+    this.articles.sort(
+        function compareByDate(a, b) {
+            if (a.daysElapsed < b.daysElapsed)
+                return -1;
+            if (a.daysElapsed > b.daysElapsed)
+                return 1;
+            return 0;
+        }
+    );
 };

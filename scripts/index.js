@@ -1,37 +1,66 @@
 /*
-    The main file with the non-object stuff
+The main file with the non-object stuff
 */
+var blog = new Blog(); // Blog object
+
+blog.callDB = function(data, msg, xhr) {
+    webDB.init();
+    webDB.setupTables();
+
+    var eTag = xhr.getResponseHeader('eTag');
+    if (typeof localStorage.articlesEtag == 'undefined' || localStorage.articlesEtag != eTag) {
+        console.log('cache miss!');
+        localStorage.articlesEtag = eTag;
+
+        // Remove all prior articles from the DB, and from blog:
+        blog.articles = [];
+        webDB.execute('delete from articles', blog.getJSON);
+
+    } else {
+        console.log('cache hit!');
+        webDB.execute('select * from articles', blog.dbFetch);
+
+    }
+
+};
+
+blog.dbFetch = function(result) {
+    result.forEach(function(e) {
+        blog.articles.push(new Article(e));
+    });
+    blog.init();
+    blog.addEvents();
+
+};
+
+blog.updateDB = function(data) {
+    // Iterate over new article JSON:
+    data.forEach(function(item) {
+        // Instantiate an article based on item from JSON:
+        var article = new Article(item);
+
+        // Add the article to blog.articles
+        blog.articles.push(article);
+
+        // Cache the article in DB
+        webDB.insertRecord(article);
+    });
+
+    blog.init();
+    blog.addEvents();
+};
+
+blog.getJSON = function() {
+    $.getJSON('scripts/blogArticles.json', blog.updateDB);
+};
+
+
 $(function() {
-    var blog = new Blog(); // Blog object
-
-    // Grab the article template and make a handlebars function
-    blog.compileTemplate = function(data) {
-        Article.prototype.compiledTemplate = Handlebars.compile(data);
-    };
-
-    blog.pullJSON = function(data, textStatus, xhr) {
-        // Check localStorage to see if data has changed
-        // If so, then pull from json file and update localStorage
-        if(localStorage.getItem('data') == null || xhr.getResponseHeader('ETag') != localStorage.getItem('ETag')) {
-            localStorage.setItem('ETag', xhr.getResponseHeader('ETag'));
-
-            // Grab the JSON using ajax
-            $.getJSON('scripts/blogArticles.json', function(data) {
-                localStorage.setItem('data', JSON.stringify(data));
-                blog.init(data); // Fill the blog
-                blog.addEvents(); // Add handlers to blog
-            });
-        } else {
-            // Otherwise, just pull articles from localStorage
-            blog.init(JSON.parse(localStorage.getItem('data'))); // Fill the blog
-            blog.addEvents(); // Add handlers to blog
-        }
-    };
-
     $.get('scripts/articleTemplate', blog.compileTemplate)
         .done($.ajax({
+            type: 'HEAD',
             url: 'scripts/blogArticles.json',
-            success: blog.pullJSON
+            success: blog.callDB
         }));
 
 });

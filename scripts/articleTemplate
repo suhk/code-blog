@@ -2,7 +2,7 @@
     <h1>{{title}}</h1>
     <h3 class={{authorSpace}}>Written by <em><a class="auth" href="{{authorUrl}}">{{author}}</a></em> {{daysElapsed}} days ago</h3>
     <h5 class={{categorySpace}}>Category: {{category}}</h5>
-    <div class="body">{{{body}}}</div>
+    <div class="markdown">{{{markdown}}}</div>
     <a href=# class="expand">Read More ></a>
     <hr size="2" color="black">
 </article>
