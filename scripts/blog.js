@@ -47,6 +47,19 @@ Blog.prototype.init = function() {
     }
 };
 
+Blog.prototype.getParameterByKey = function(key) {
+    var match = RegExp('[?&]' + key + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+};
+
+Blog.prototype.isAdmin = function() {
+    var admin = blog.getParameterByKey('admin');
+    if (admin == 'true') {
+        return true;
+    }
+    return false;
+};
+
 Blog.prototype.addEvents = function() {
     // Add click event for 'read more'
     $('main').on('click', '.expand', function(e) {

@@ -6,14 +6,20 @@ var Article = function(props) {
     this.title = props.title;
     this.markdown = props.markdown;
     this.publishedOn = props.publishedOn;
-
-    var date = new Date(this.publishedOn);
-    var today = new Date();
-    this.daysElapsed = Math.round((today - date) / 1000 / 60 / 60 / 24);
+    if(this.publishedOn == null) {
+        this.daysElapsed = 0;
+    } else {
+        var date = new Date(this.publishedOn);
+        var today = new Date();
+        this.daysElapsed = Math.round((today - date) / 1000 / 60 / 60 / 24);
+    }
 };
 
 // Takes the handlebars template, fill it, and add it to the web page
 Article.prototype.toHTML = function (selector) {
+    if (!blog.isAdmin() && !this.publishedOn && selector != '#preview') {
+        return '';
+    }
     var data = {
         title: this.title,
         author: this.author,

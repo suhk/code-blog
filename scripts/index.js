@@ -14,11 +14,11 @@ blog.callDB = function(data, msg, xhr) {
 
         // Remove all prior articles from the DB, and from blog:
         blog.articles = [];
-        webDB.execute('delete from articles', blog.getJSON);
+        webDB.execute('delete from articles;', blog.getJSON);
 
     } else {
         console.log('cache hit!');
-        webDB.execute('select * from articles', blog.dbFetch);
+        webDB.execute('select * from articles;', blog.dbFetch);
 
     }
 
@@ -53,7 +53,6 @@ blog.updateDB = function(data) {
 blog.getJSON = function() {
     $.getJSON('scripts/blogArticles.json', blog.updateDB);
 };
-
 
 $(function() {
     $.get('scripts/articleTemplate', blog.compileTemplate)

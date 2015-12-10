@@ -4,8 +4,8 @@ blog.checkForEditArticle = function () {
     if (blog.getParameterByKey('id')) {
         var id = blog.getParameterByKey('id');
         blog.loadArticleById(id);
-        $('#update-article-btn').show().data('article-id', id);
-        $('#delete-article-btn').show().data('article-id', id);
+        $('#update-article-btn').data('article-id', id);
+        $('#delete-article-btn').data('article-id', id);
         console.log('Found article to edit.');
     } else {
         console.log('No article to edit.');
@@ -35,71 +35,41 @@ blog.fillFormWithArticle = function (a) {
     blog.buildPreview();
 };
 
-blog.getParameterByKey = function(key) {
-    var match = RegExp('[?&]' + key + '=([^&]*)').exec(window.location.search);
-    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-};
-
-$(function() {
-    $.get('scripts/articleTemplate', blog.compileTemplate)
-    .done(webDB.init())
-    .done(blog.checkForEditArticle);
-});
-
 blog.buildArticle = function() {
     var prop = {};
 
-    // read values from form
+    // Read values from form
     prop.title = $('#article-title').val();
     prop.author = $('#article-author').val();
     prop.authorUrl = $('#article-author-url').val();
     prop.category = $('#article-category').val();
-    prop.publishedOn = new Date();
+
+    if($('#article-published').checked) {
+        prop.publishedOn = new Date();
+    } else {
+        prop.publishedOn = null;
+    }
 
     $articleBody = $('#article-body').val();
     prop.markdown = $articleBody;
+
+    // Write JSON string
+    $('#article-json').val(JSON.stringify(prop));
+
     return new Article(prop);
 };
 
 blog.buildPreview = function() {
-    var prop = {};
-
-    // read values from form
-    prop.title = $('#article-title').val();
-    prop.author = $('#article-author').val();
-    prop.authorUrl = $('#article-author-url').val();
-    prop.category = $('#article-category').val();
-    prop.publishedOn = new Date();
-
-    $articleBody = $('#article-body').val();
-    prop.markdown = $articleBody;
-
-    // display preview on page
-    var newArticle = new Article(prop);
+    // Display preview on page
+    var newArticle = blog.buildArticle();
     $('#preview article').children().remove();
     newArticle.toHTML('#preview');
 
-    // write JSON string
-    $('#article-json').val(JSON.stringify(prop));
-
+    // Highlight code in markup
     $('pre code').each(function(i, block) {
         hljs.highlightBlock(block);
     });
 };
-
-$('#update-article-btn').on('click', function () {
-    var id = $(this).data('article-id');
-    var a = blog.buildArticle();
-    a.id = id;
-
-    webDB.execute([
-        {
-            'sql': 'UPDATE articles SET title=?, author=?, authorUrl=?, category=?, publishedOn=?, markdown=? WHERE id = ' + a.id + ';',
-            'data': [a.title, a.author, a.authorUrl, a.category, a.publishedOn, a.markdown]
-        }
-    ]);
-
-});
 
 blog.clearNewForm = function() {
     $('#article-title').val('');
@@ -109,25 +79,45 @@ blog.clearNewForm = function() {
     $('#article-body').val('');
 };
 
-$('#add-article-btn').on('click', function () {
-    var article = blog.buildArticle();
-    webDB.execute([
-        {
-            'sql': 'INSERT INTO articles (title, author, authorUrl, category, publishedOn, markdown) VALUES (?, ?, ?, ?, ?, ?);',
-            'data': [article.title, article.author, article.authorUrl, article.category, article.publishedOn, article.markdown]
-        }
-    ]);
-});
+$(function() {
+    $.get('scripts/articleTemplate', blog.compileTemplate)
+        .done(webDB.init())
+        .done(blog.checkForEditArticle);
 
-$('#delete-article-btn').on('click', function () {
-    var id = $(this).data('article-id');
-    // Remove this record from the DB:
-    webDB.execute('delete from articles where id=' + id);
-    blog.buildPreview();
-    blog.clearNewForm();
-});
+    $('#add-article-btn').on('click', function () {
+        var article = blog.buildArticle();
+        webDB.execute([
+            {
+                'sql': 'INSERT INTO articles (title, author, authorUrl, category, publishedOn, markdown) VALUES (?, ?, ?, ?, ?, ?);',
+                'data': [article.title, article.author, article.authorUrl, article.category, article.publishedOn, article.markdown]
+            }
+        ]);
+    });
 
-$('#write').on('mouseup keyup', function(event) {
-    event.preventDefault();
-    blog.buildPreview();
+    $('#update-article-btn').on('click', function () {
+        var id = $(this).data('article-id');
+        var a = blog.buildArticle();
+        a.id = id;
+
+        webDB.execute([
+            {
+                'sql': 'UPDATE articles SET title=?, author=?, authorUrl=?, category=?, publishedOn=?, markdown=? WHERE id = ' + a.id + ';',
+                'data': [a.title, a.author, a.authorUrl, a.category, a.publishedOn, a.markdown]
+            }
+        ]);
+
+    });
+
+    $('#delete-article-btn').on('click', function () {
+        var id = $(this).data('article-id');
+        // Remove this record from the DB:
+        webDB.execute('delete from articles where id=' + id);
+        blog.buildPreview();
+        blog.clearNewForm();
+    });
+
+    $('#write').on('keyup', function(event) {
+        event.preventDefault();
+        blog.buildPreview();
+    });
 });
