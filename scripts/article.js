@@ -1,4 +1,5 @@
 var Article = function(props) {
+    this.id = props.id;
     this.author = props.author;
     this.authorUrl = props.authorUrl;
     this.category = props.category;
@@ -21,7 +22,8 @@ Article.prototype.toHTML = function (selector) {
         daysElapsed: this.daysElapsed,
         markdown: marked(this.markdown),
         authorSpace: this.author.replace(/\s/g, ''),
-        categorySpace: this.category.replace(/\s/g, '')
+        categorySpace: this.category.replace(/\s/g, ''),
+        id: this.id
     };
     var html = this.compiledTemplate(data);
     $(selector).append(html);
