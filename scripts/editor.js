@@ -4,7 +4,6 @@ blog.checkForEditArticle = function () {
     if (blog.getParameterByKey('id')) {
         var id = blog.getParameterByKey('id');
         blog.loadArticleById(id);
-        $('#add-article-btn').hide();
         $('#update-article-btn').show().data('article-id', id);
         $('#delete-article-btn').show().data('article-id', id);
         console.log('Found article to edit.');
@@ -95,7 +94,7 @@ $('#update-article-btn').on('click', function () {
 
     webDB.execute([
         {
-            'sql': 'update articles set title=?, author=?, authorUrl=?, category=?, publishedOn=?, markdown=? where id = ' + a.id + ';',
+            'sql': 'UPDATE articles SET title=?, author=?, authorUrl=?, category=?, publishedOn=?, markdown=? WHERE id = ' + a.id + ';',
             'data': [a.title, a.author, a.authorUrl, a.category, a.publishedOn, a.markdown]
         }
     ]);
