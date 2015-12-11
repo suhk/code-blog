@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>
         Kenny Suh's Blog
     </title>
-    <link rel='stylesheet' href='styles/index.css'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='styles/base.css'>
+    <link rel='stylesheet' href='styles/layout.css'>
+    <link rel='stylesheet' href='styles/module.css'>
+    <link rel='stylesheet' href='styles/state.css'>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/styles/default.min.css">
+
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.min.js" charset="utf-8"></script>
+
 </head>
 
 <body>
@@ -17,23 +26,50 @@
             <h2>
                 Static pages are the best
             </h2>
-        <nav>
-            <ul>
-                <li>GitHub</li>
-                <li>Twitter</li>
-                <li>About</li>
-                <li>Home</li>
-            </ul>
-        </nav>
-        </center>
+            </header>
+            <nav>
+                <ul>
+                    <li class="tab" data-content="home"><a href=#>Home</a></li>
+                    <li class="tab" data-content="about"><a href=#>About</a></li>
+                    <li><a href="http://www.something.com" target=_blank>Twitter</a></li>
+                    <li><a href="http://www.github.com/suhk" target=_blank>Github</a></li>
+                </ul>
+            </nav>
+            </center>
 
-    </header>
-    <main>
+        <div class="filter">
+            Sort by category:
+            <select id="category">
+                <option value="null">None</option>
+            </select>
+        </div>
+        <div class="filter">
+            Sort by author:
+            <select id="author">
+                <option value="null">None</option>
+            </select>
+        </div>
+    <div class="all">
+        <section id="home">
+            <main>
 
-    </main>
+            </main>
+        </section>
+        <section id="about">
+            <div class="content" hidden>
+                <p>My name is Kenny, and I cannot touch my shoulders.</p>
+                <p>My name is Kenny, and I cannot touch my shoulders.</p>
+                <p>My name is Kenny, and I cannot touch my shoulders.</p>
+                <p>My name is Kenny, and I cannot touch my shoulders.</p>
+                <p>My name is Kenny, and I cannot touch my shoulders.</p>
+            </div>
+        </section>
+    </div>
     <script src="scripts/article.js"></script>
     <script src="scripts/blog.js"></script>
-    <script src="scripts/index.js"></script>    
+    <script src="scripts/index.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
 
 </html>
