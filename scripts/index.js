@@ -51,7 +51,7 @@ blog.updateDB = function(data) {
 };
 
 blog.getJSON = function() {
-    $.getJSON('scripts/blogArticles.json', blog.updateDB);
+    $.getJSON('/scripts/blogArticles.json', blog.updateDB);
 };
 
 $(function() {
