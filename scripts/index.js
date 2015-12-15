@@ -55,11 +55,11 @@ blog.getJSON = function() {
 };
 
 $(function() {
-    $.get('scripts/articleTemplate', blog.compileTemplate)
-        .done($.ajax({
-            type: 'HEAD',
-            url: 'scripts/blogArticles.json',
-            success: blog.callDB
-        }));
+    // $.get('scripts/articleTemplate', blog.compileTemplate)
+    //     .done($.ajax({
+    //         type: 'HEAD',
+    //         url: 'scripts/blogArticles.json',
+    //         success: blog.callDB
+    //     }));
 
 });
