@@ -11,7 +11,8 @@ aboutView.render = function() {
 
 aboutView.getInfo = function(data) {
   data.forEach(function(repo) {
-    $('#content').append(repo.name);
+    $('.content').append(repo.name);
+    console.log(repo.name);
   });
 
 };
