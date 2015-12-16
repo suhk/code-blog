@@ -1,6 +1,7 @@
 aboutView = {};
 
 aboutView.render = function() {
+
   $.ajax({
     type: 'GET',
     url: 'https://api.github.com/users/suhk/repos?sort=updated',
@@ -10,9 +11,10 @@ aboutView.render = function() {
 };
 
 aboutView.getInfo = function(data) {
+  $('.content').show();
+  $('.filter').hide();
   data.forEach(function(repo) {
-    $('.content').append(repo.name);
-    console.log(repo.name);
+    $('.content ul').append('<li>' + repo.name + '</li>');
   });
 
 };

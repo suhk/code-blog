@@ -43,6 +43,7 @@ textarea {
 .content {
     float: left;
     min-width: 90%;
+    display: block;
 }
 
 @media screen and (min-width: 400px) {

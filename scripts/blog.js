@@ -19,6 +19,7 @@ Blog.prototype.init = function() {
   }
 
   $('#about').hide();
+  $('.filter').show();
 
   // Hide everything but the first paragraph
   $('article p:not(:first-child)').hide();
