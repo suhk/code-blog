@@ -40,7 +40,7 @@ articleController.updateDB = function(data) {
 
     // Add the article to blog.articles
     blog.articles.push(article);
-    
+
     // Cache the article in DB
     webDB.insertRecord(article);
   });
