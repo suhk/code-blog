@@ -10,7 +10,7 @@ aboutView.render = function() {
 };
 
 aboutView.getInfo = function(data) {
-  $('#about').prop('display', 'block');
+  $('#all').show();
   $('section').hide();
   $('.content ul').empty();
   $('.content').show();
