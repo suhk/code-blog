@@ -4,8 +4,7 @@ aboutView.render = function() {
 
   $.ajax({
     type: 'GET',
-    url: 'https://api.github.com/users/suhk/repos?sort=updated',
-    header: {Authorization: 'token ' + githubToken},
+    url: '/github/users/suhk/repos?sort=updated',
     success: aboutView.getInfo
   });
 };
