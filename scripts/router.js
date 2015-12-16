@@ -1,3 +1,3 @@
 page('/', articleController.index);
-page('/', aboutController.index);
+page('/about', aboutController.index);
 page.start();
