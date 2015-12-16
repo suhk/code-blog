@@ -10,6 +10,7 @@ aboutView.render = function() {
 };
 
 aboutView.getInfo = function(data) {
+  $('#about').show();
   $('section').hide();
   $('.content ul').empty();
   $('.content').show();
