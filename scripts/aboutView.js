@@ -10,5 +10,8 @@ aboutView.render = function() {
 };
 
 aboutView.getInfo = function(data) {
-  $('#content').append(data);
+  data.forEach(function(repo) {
+    $('#content').append(repo.name);
+  });
+
 };
