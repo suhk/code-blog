@@ -1,0 +1,3 @@
+aboutController.index = function() {
+  
+};
