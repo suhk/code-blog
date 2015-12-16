@@ -8,6 +8,10 @@ textarea {
     float: left;
 }
 
+#about {
+    display: block;
+}
+
 #make {
     float: right;
     max-width: 45%;
