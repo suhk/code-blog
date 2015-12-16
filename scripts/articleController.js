@@ -35,7 +35,6 @@ articleController.dbFetch = function(result) {
 articleController.updateDB = function(data) {
     // Iterate over new article JSON:
     data.forEach(function(item) {
-        console.log(item);
         // Instantiate an article based on item from JSON:
         var article = new Article(item);
 
