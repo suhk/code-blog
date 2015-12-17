@@ -11,7 +11,6 @@ aboutView.render = function() {
 
 aboutView.getInfo = function(data) {
   $('#all').show();
-  $('section').hide();
   $('.content ul').empty();
   $('.content').show();
   $('.filter').hide();
