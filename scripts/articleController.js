@@ -54,6 +54,51 @@ articleController.getJSON = function() {
   $.getJSON('/scripts/blogArticles.json', articleController.updateDB);
 };
 
+articleController.category = function(context) {
+  articleController.findByCategory(context.params.category, articleController.show);
+};
+
+articleController.findByCategory = function(category, callback) {
+  webDB.init();
+  webDB.execute([
+    {
+      'sql': 'select * from articles where category=?',
+      'data': [category]
+    }
+  ], callback);
+};
+
+articleController.findByAuthor = function(author, callback) {
+  webDB.init();
+  webDB.execute([
+    {
+      'sql': 'select * from articles where author=?',
+      'data': [author]
+    }
+  ], callback);
+};
+
+articleController.author = function(context) {
+  articleController.findByCategory(context.params.author, articleController.show);
+};
+
+articleController.show = function(data) {
+  articleController.renderNotAll(data);
+};
+
+articleController.renderNotAll = function(articles) {
+  $.get('/scripts/articleTemplate', blog.compileTemplate)
+    .done(function() {
+      $('main').empty();
+      for(i = 0; i < articles.length; i++) {
+        var art = new Article(articles[i]);
+        art.toHTML('main');
+      }
+      blog.init2();
+      blog.addEvents();
+    });
+};
+
 articleController.index = function() {
   $.ajaxPrefilter(function(options) {
     options.async = true;
