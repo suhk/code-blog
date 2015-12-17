@@ -24,9 +24,9 @@ Blog.prototype.init = function() {
 
   // Hide everything but the first paragraph
   $('article p:not(:first-child)').hide();
-
+  console.log($('#category').length);
   // Get the list of categories and authors for sorting and put them into dropdowns
-  if($('#category').length > 1) {
+  if($('#category').length == 1) {
     var cats = [];
     var auths = [];
     for(i = 0; i < this.articles.length; i++) {
