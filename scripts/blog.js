@@ -18,6 +18,7 @@ Blog.prototype.init = function() {
     this.articles[i].toHTML('main');
   }
 
+  $('#home').show();
   $('#about').hide();
   $('.filter').show();
 
