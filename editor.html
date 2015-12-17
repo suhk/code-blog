@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        Kenny Suh's Blog
+    </title>
+    <meta name=”viewport” content=”width=device-width, initial-scale=1”>
+    <link rel='stylesheet' href='styles/base.css'>
+    <link rel='stylesheet' href='/styles/layout.css'>
+    <link rel='stylesheet' href='/styles/module.css'>
+    <link rel='stylesheet' href='/styles/state.css'>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/styles/default.min.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.min.js" charset="utf-8"></script>
+    <script id="template" type="text/x-handlebars-template">
+        <article>
+            <h1>{{title}}</h1>
+            <h3 class={{authorSpace}}>Written by <em><a class="auth" href="{{authorUrl}}">{{author}}</a></em> {{daysElapsed}} days ago</h3>
+            <h5 class={{category}}>Category: {{category}}</h5>
+            <div class="body">{{{body}}}</div>
+            <hr size="2" color="black">
+        </article>
+    </script>
+</head>
+
+<body>
+    <header>
+        <center>
+            <h1>
+                The Blog Of A Budding Web Developer
+            </h1>
+            <h2>
+                The secret spot for editing articles.
+            </h2>
+        </center>
+    </header>
+
+    <main>
+        <h2 class="custHeader">
+            Edit Article
+        </h2>
+        <div id="make">
+            <section>
+                <form id="write">
+                    <label>
+                        Title
+                        <br>
+                        <input type="text" id="article-title" placeholder="Article Title" required>
+                    </label>
+                    <label>
+                        Author
+                        <br>
+                        <input type="text" id="article-author" placeholder="Author Name" required>
+                    </label>
+                    <label>
+                        Author URL
+                        <br>
+                        <input type="text" id="article-author-url" placeholder="Author URL" required>
+                    </label>
+                    <label>
+                        Category
+                        <br>
+                        <input type="text" id="article-category" placeholder="Category" required>
+                    </label>
+                    <label>
+                        Article
+                        <br>
+                        <textarea id="article-body" rows="8" cols="40"></textarea>
+                    </label>
+                    <label>
+                      <input type="checkbox" id="article-published"> Published
+                    </label>
+                    <button id="update-article-btn">Update Article</button>
+                    <button id="delete-article-btn">Delete Article</button>
+                </form>
+                <a class="button" href="new.html">Create New Article</a>
+
+                <label>
+                    Paste this code into blogArticles.js
+                    <br>
+                    <input type="text" readonly id="article-json">
+                </label>
+            </section>
+        </div>
+
+        <div id="prev">
+            <section id="preview">
+                <h2><u>Preview</u></h2>
+            </section>
+        </div>
+
+    </main>
+    <script src="scripts/html5sql.js"></script>
+    <script src="scripts/webDB.js"></script>
+    <script src="scripts/article.js"></script>
+    <script src="scripts/blog.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js"></script>
+    <script src="scripts/editor.js"></script>
+</body>
+
+</html>
