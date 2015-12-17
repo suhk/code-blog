@@ -26,25 +26,27 @@ Blog.prototype.init = function() {
   $('article p:not(:first-child)').hide();
 
   // Get the list of categories and authors for sorting and put them into dropdowns
-  var cats = [];
-  var auths = [];
-  for(i = 0; i < this.articles.length; i++) {
-    // If it is a new category, add it to the list
-    if(cats.indexOf(this.articles[i].category) < 0) {
-      cats.push(this.articles[i].category);
+  if($('#category').length > 1) {
+    var cats = [];
+    var auths = [];
+    for(i = 0; i < this.articles.length; i++) {
+      // If it is a new category, add it to the list
+      if(cats.indexOf(this.articles[i].category) < 0) {
+        cats.push(this.articles[i].category);
 
-      var $op = $('option:first').clone();
-      $op.text(this.articles[i].category);
-      $('#category').append($op);
-    }
+        var $op = $('option:first').clone();
+        $op.text(this.articles[i].category);
+        $('#category').append($op);
+      }
 
-    // If it is a new author, add it to the list
-    if(auths.indexOf(this.articles[i].author) < 0) {
-      auths.push(this.articles[i].author);
+      // If it is a new author, add it to the list
+      if(auths.indexOf(this.articles[i].author) < 0) {
+        auths.push(this.articles[i].author);
 
-      var $op2 = $('option:first').clone();
-      $op2.text(this.articles[i].author);
-      $('#author').append($op2);
+        var $op2 = $('option:first').clone();
+        $op2.text(this.articles[i].author);
+        $('#author').append($op2);
+      }
     }
   }
 };
