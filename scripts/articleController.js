@@ -54,8 +54,14 @@ articleController.getJSON = function() {
   $.getJSON('/scripts/blogArticles.json', articleController.updateDB);
 };
 
+//---------------------------------------------
+
 articleController.category = function(context) {
   articleController.findByCategory(context.params.category, articleController.show);
+};
+
+articleController.author = function(context) {
+  articleController.findByAuthor(context.params.author, articleController.show);
 };
 
 articleController.findByCategory = function(category, callback) {
@@ -78,10 +84,6 @@ articleController.findByAuthor = function(author, callback) {
   ], callback);
 };
 
-articleController.author = function(context) {
-  articleController.findByCategory(context.params.author, articleController.show);
-};
-
 articleController.show = function(data) {
   articleController.renderNotAll(data);
 };
@@ -94,8 +96,19 @@ articleController.renderNotAll = function(articles) {
         var art = new Article(articles[i]);
         art.toHTML('main');
       }
-      blog.init2();
-      blog.addEvents();
+      $('#home').show();
+      $('#about').hide();
+      $('.filter').show();
+    
+      $('article p:not(:first-child)').hide();
+      //
+      // webDB.execute('select * from articles;', function(result) {
+      //   result.forEach(function(e) {
+      //     blog.articles.push(new Article(e));
+      //   });
+      //   blog.init2();
+      //   blog.addEvents();
+      // });
     });
 };
 

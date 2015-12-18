@@ -31,7 +31,7 @@ Blog.prototype.init2 = function() {
   $('article p:not(:first-child)').hide();
 
   // Get the list of categories and authors for sorting and put them into dropdowns
-  if($('#category').length == 1) {
+  if($('#category').length <= 1) {
     var cats = [];
     var auths = [];
 
@@ -88,36 +88,30 @@ Blog.prototype.addEvents = function() {
 
   // Add event handler for category search
   $('#category').on('change', function() {
-    location.href = '/category/' + $('#category option:selected').text();
+    $('#author').val('null'); // Resets the author filter
+    this.cat = $('#category option:selected').text(); // Set the category filter
 
-    // $('#author').val('null'); // Resets the author filter
-    // this.cat = $('#category option:selected').text(); // Set the category filter
-    //
-    // // If you select 'None', show all articles
-    // // Otherwise, show filtered articles
-    // if(this.cat == 'None') {
-    //   $('article').fadeIn(500);
-    // } else {
-    //   $('article').hide();
-    //   $('.' + $('#category option:selected').text().replace(/\s/g, '')).parent().fadeIn(500);
-    // }
+    // If you select 'None', show all articles
+    // Otherwise, show filtered articles
+    if(this.cat == '--') {
+      page('/');
+    } else {
+      page('/category/' + $('#category option:selected').text());
+    }
   });
 
   // Add event handler for author search
   $('#author').on('change', function() {
-    location.href = '/category/' + $('#author option:selected').text();
+    $('#category').val('null'); // Resets the author filter
+    this.auth = $('#author option:selected').text(); // Set the author filter
 
-    // $('#category').val('null'); // Resets the author filter
-    // this.auth = $('#author option:selected').text(); // Set the author filter
-    //
-    // // If you select 'None', show all articles
-    // // Otherwise, show filtered articles
-    // if(this.auth == 'None') {
-    //   $('article').fadeIn(500);
-    // } else {
-    //   $('article').hide();
-    //   $('.' + $('#author option:selected').text().replace(/\s/g, '')).parent().fadeIn(500);
-    // }
+    // If you select 'None', show all articles
+    // Otherwise, show filtered articles
+    if(this.auth == '--') {
+      page('/');
+    } else {
+      page('/author/' + $('#author option:selected').text());
+    }
   });
 };
 
