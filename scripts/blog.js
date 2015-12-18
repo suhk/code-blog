@@ -79,13 +79,6 @@ Blog.prototype.addEvents = function() {
     $(this).fadeOut();
   });
 
-  // // Add click events for nav bar
-  // $('.tab').on('click', function(e) {
-  //   e.preventDefault();
-  //   $('section').hide();
-  //   $('#' + $(this).data('content')).fadeIn(500);
-  // });
-
   // Add event handler for category search
   $('#category').on('change', function() {
     $('#author').val('null'); // Resets the author filter
