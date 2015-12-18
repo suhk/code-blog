@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>
         Kenny Suh's Blog
     </title>
-    <link rel='stylesheet' href='styles/index.css'>
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='/styles/base.css'>
+    <link rel='stylesheet' href='/styles/layout.css'>
+    <link rel='stylesheet' href='/styles/module.css'>
+    <link rel='stylesheet' href='/styles/state.css'>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/styles/default.min.css">
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.min.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -17,23 +25,53 @@
             <h2>
                 Static pages are the best
             </h2>
-        <nav>
-            <ul>
-                <li>GitHub</li>
-                <li>Twitter</li>
-                <li>About</li>
-                <li>Home</li>
-            </ul>
-        </nav>
+            </header>
+            <nav>
+                <ul>
+                    <li><a class="tab" data-content="home" href="/">Home</a></li>
+                    <li><a class="tab" data-content="about" href="/about">About</a></li>
+                    <li><a href="http://www.something.com" target=_blank>Twitter</a></li>
+                    <li><a href="http://www.github.com/suhk" target=_blank>Github</a></li>
+                </ul>
+            </nav>
         </center>
 
-    </header>
-    <main>
+        <div class="filter">
+            Sort by category:
+            <select id="category">
+                <option value="null">--</option>
+            </select>
+        </div>
+        <div class="filter">
+            Sort by author:
+            <select id="author">
+                <option value="null">--</option>
+            </select>
+        </div>
+    <div class="all">
+        <section id="home">
+            <main>
 
-    </main>
-    <script src="scripts/article.js"></script>
-    <script src="scripts/blog.js"></script>
-    <script src="scripts/index.js"></script>    
+            </main>
+        </section>
+        <section id="about">
+            <div class="content">
+              <h3>My Repositories</h3>
+              <ul></ul>
+            </div>
+        </section>
+    </div>
+    <script src="/scripts/html5sql.js"></script>
+    <script src="/scripts/webDB.js"></script>
+    <script src="/scripts/blog.js"></script>
+    <script src="/scripts/article.js"></script>
+    <script src="/scripts/articleController.js"></script>
+    <script src="/scripts/aboutView.js"></script>
+    <script src="/scripts/aboutController.js"></script>
+    <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
+    <script src="/scripts/router.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
 
 </html>
